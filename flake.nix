@@ -1,6 +1,8 @@
 {
   description = "Zotero on Nix";
 
+  inputs.nixpkgs.url = "nixpkgs/nixos-23.11";
+
   outputs = { self, nixpkgs }: {
 
     packages.x86_64-linux = rec {
