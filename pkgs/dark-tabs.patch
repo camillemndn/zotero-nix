@@ -1,0 +1,22 @@
+diff --git a/chrome/content/zotero-platform/unix/overlay.css b/chrome/content/zotero-platform/unix/overlay.css
+index 8b4b72e69..4e0978665 100644
+--- a/chrome/content/zotero-platform/unix/overlay.css
++++ b/chrome/content/zotero-platform/unix/overlay.css
+@@ -8,6 +8,17 @@
+ 	}
+ }
+ 
++@media (prefers-color-scheme: dark) {
++#zotero-tb, #zotero-toolbar, #navigator-toolbox, #tab-bar-container, .tabs, .tab {
++	background: #353535 !important;
++	color: #FFFFFF !important;
++	border-bottom: 0;
++}
++.tab { background: #242424 !important; }
++.tab:hover { background: #434343 !important; }
++.tab.selected { background: #353535 !important; }
++.tab.selected:hover { background: #353535 !important; } }
++
+ .zotero-tb-button[type="menu"] > .toolbarbutton-menu-dropmarker {
+ 	-moz-default-appearance: toolbarbutton-dropdown;	
+ 	margin-left: 4px;
