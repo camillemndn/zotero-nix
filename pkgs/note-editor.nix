@@ -9,8 +9,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "note-editor";
-    rev = "e2e3009bbce0070488989c8678bb2da3e22d7514";
-    hash = "sha256-PXaoF4piXyN2r4WmL00aZv56VcN06xwbj9l1RoQRZww=";
+    rev = "7d1943329e3e2236cd5236f65acd645805455b5f";
+    hash = "sha256-ft1hMwBC2p7/LGwqjHEtjh1TMTT5qaTy9WSa4Jdzlqc=";
   };
 
   npmDepsHash = "sha256-3lKk9M9UMH2JOZwfmQQpzGezU5zL0dkF+SuT735Cu/A=";

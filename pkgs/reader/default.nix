@@ -10,8 +10,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf-reader";
-    rev = "439aacd3fd0e1194cd46106f9fac606fe302702b";
-    hash = "sha256-LrQMpW9V8qg7dJQg+1RVkQq/NRfxaxIYr+MhmS+7OFg=";
+    rev = "c348923ec469b5e19b94359cc4238e4a84cfc4d0";
+    hash = "sha256-CtQI/7FCTuUEoFNppZAUn4c4UgFdxv1xgWbqo/wWf0g=";
   };
 
   npmDepsHash = "sha256-zzAVIJfSjV/ij0tOlKSWSbPkIQEPrCLwGHAW7/aUyXI=";
