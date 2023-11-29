@@ -15,6 +15,11 @@
 , perl
 , rsync
 , callPackage
+, makeBinaryWrapper
+, glib
+, glibc
+, pciutils
+, gtk3
 }:
 
 buildNpmPackage rec {
@@ -87,7 +92,7 @@ buildNpmPackage rec {
       -e '/linux\/updater.tar.xz/,+3d'
   '';
 
-  nativeBuildInputs = [ copyDesktopItems perl python3 rsync unzip zip ];
+  nativeBuildInputs = [ copyDesktopItems makeBinaryWrapper perl python3 rsync unzip zip gtk3 ];
 
   desktopItems = [
     (makeDesktopItem {
@@ -124,7 +129,12 @@ buildNpmPackage rec {
   installPhase = ''
     mkdir -p $out/{bin,lib}
     cp -Lr app/staging/Zotero_linux $out/lib/zotero
-    ln -s $out/lib/zotero/zotero $out/bin
+    
+    makeBinaryWrapper $out/{lib/zotero,bin}/zotero \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ glib.out glibc pciutils gtk3 ] }"
+    
+    patchelf $out/lib/zotero/zotero-bin \
+      --set-interpreter $(cat $NIX_CC/nix-support/dynamic-linker)
 
     for size in 16 32 48 256; do
       install -Dm444 app/staging/Zotero_linux/chrome/icons/default/default$size.png \
@@ -133,6 +143,8 @@ buildNpmPackage rec {
     
     runHook postInstall
   '';
+
+  passthru = { inherit gtk3; };
 
   meta = with lib; {
     description = "Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources";
