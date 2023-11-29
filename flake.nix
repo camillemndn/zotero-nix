@@ -12,7 +12,8 @@
       let pkgs = nixpkgs.legacyPackages.${system}; in {
         packages = rec {
           default = zotero;
-          zotero = pkgs.callPackage ./pkgs { };
+          zotero = pkgs.wrapFirefox zotero-unwrapped { };
+          zotero-unwrapped = pkgs.callPackage ./pkgs { };
           zotero-note-editor = pkgs.callPackage ./pkgs/note-editor.nix { };
           zotero-pdf-worker = pkgs.callPackage ./pkgs/pdf-worker { };
           zotero-pdf-worker-pdfjs = pkgs.callPackage ./pkgs/pdf-worker/pdfjs.nix { };
