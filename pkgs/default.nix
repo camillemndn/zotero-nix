@@ -29,8 +29,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
-    rev = "58c6bdf504150cb7ae78a11d87a2d69996abbfb7";
-    hash = "sha256-uDcDaF80NuM793f7h5jgW1kpgVN80cErpqAjXKpJBSg=";
+    rev = "2f8e536f2be53a2f4d4b7221caaccdce5939adcc";
+    hash = "sha256-Gu14BpJzo+TMbUa9ZBfEuGlAKTA55KOhdo6e7ccms4Y=";
     fetchSubmodules = true;
   };
 
