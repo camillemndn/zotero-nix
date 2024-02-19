@@ -14,7 +14,5 @@ buildNpmPackage rec {
   };
 
   npmDepsHash = "sha256-tWDADhAeXG0HSvFnpdGOya3CjSb0i2aR3E1Y3r1J81o=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
   dontNpmBuild = true;
 }

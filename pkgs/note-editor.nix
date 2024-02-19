@@ -9,13 +9,11 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "note-editor";
-    rev = "7d1943329e3e2236cd5236f65acd645805455b5f";
-    hash = "sha256-ft1hMwBC2p7/LGwqjHEtjh1TMTT5qaTy9WSa4Jdzlqc=";
+    rev = "fde942f8a238e2753631728dae6cc4c69128d440";
+    hash = "sha256-H8ZUquCCYD54rBUPQo1MZmATfQkYASZ/VIWu0UuMhe0=";
   };
 
-  npmDepsHash = "sha256-3lKk9M9UMH2JOZwfmQQpzGezU5zL0dkF+SuT735Cu/A=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
+  npmDepsHash = "sha256-dvlgXixWGW4pKiAr36fgrWeMY/XRTnp4Yo9MWwpeWkE=";
 
   postInstall = ''
     cp -r build $out/lib/node_modules/zotero-note-editor/build

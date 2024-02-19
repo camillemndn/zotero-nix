@@ -10,13 +10,11 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf-worker";
-    rev = "85d3c0ed13f128400e7e54243eacebf349b88fc5";
-    hash = "sha256-4Y99bmrHJOsyCDHAxC6ZUP6XfBQ76a1UAOvO4t/d0K8=";
+    rev = "613e4a78f3c2176c339c0583f678c343466cbf76";
+    hash = "sha256-Mzlo89S7bCZNNr0DPAznTKfo7VhUsLuPy7gRcYh16oo=";
   };
 
   npmDepsHash = "sha256-nqKXFcB1Y3+S+6IrxNIeKj/VH0V7myavQs+S25GT16w=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
 
   postPatch = ''
     # Avoid npm install since it is handled by buildNpmPackage

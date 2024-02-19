@@ -9,13 +9,11 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "translators";
-    rev = "450efe2d873be12131e33f78e37084264ccf6ed0";
-    hash = "sha256-eTMHNQI35UabY4R8dT+ibaoZ9Dog61w3c/K+SIhbEUA=";
+    rev = "4a8bd03064a56420dcfa0910791eba1b9447e99a";
+    hash = "sha256-4z+AGy4mBFaUxRAOKswcpPN7nwE7mGP+uMnIqtsl5jY=";
   };
 
   npmDepsHash = "sha256-qr/XMbId/FYt14O2IztSBAPd+mR7h8LJg4KA+IUyeGk=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
 
   postPatch = ''
     # Remove unused dependency

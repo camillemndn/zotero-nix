@@ -9,17 +9,10 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "epub.js";
-    rev = "ea03f7fd90b91a18052fa0095776de4c3abdd236";
-    hash = "sha256-pzh4G0L5vTNhqiFzAtOWanLJug+G2aRAdGYfy5klj/E=";
+    rev = "0beb4ebb54980772196771affe9763a66b0eb008";
+    hash = "sha256-I6ba/crqpb6FtxkVrBBmvw9BawRWsIDAD/W0Oa4e9ZM=";
   };
 
-  npmDepsHash = "sha256-LwpOG2bMdn13CAGgVf0APcj4R4z4PsKzHUwO8dujsYE=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
-  # makeCacheWritable = true;
-
-  postPatch = ''
-    sed -i package.json -e '/karma-phantomjs-launcher/d'
-    cp ${./epubjs-package-lock.patch} package-lock.json
-  '';
+  npmDepsHash = "sha256-fau29rCdET6lmyvUvzXRzygfVdfIRU8Vd9JcmSgBy5o=";
+  npmRebuildFlags = [ "--ignore-scripts" ];
 }

@@ -9,13 +9,11 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf.js";
-    rev = "10691ef026c3a3e56ba5afb29ff9f89412bd0698";
-    hash = "sha256-1lgS0hoeJ27k7RnDUloCBY635IudF3VYvgc5i8y31yA=";
+    rev = "000a5dfad672faaf98a52f06f1e741d3924940f6";
+    hash = "sha256-05nAsWY9545pIyhwdX+y+iPpY4Fv7qNQBoVqDlOu3pY=";
   };
 
   npmDepsHash = "sha256-+LTfiFIZoGO/6dY4COEcjAcNcRkwEy+TqwISlUIcwh8=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
   makeCacheWritable = true;
 
   postPatch = ''

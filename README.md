@@ -47,11 +47,7 @@ nix run github:camillemndn/zotero-nix
 
 Use:
 ```
-git submodule status --recursive > hashes
-```
-on a fresh clone of [this](https://github.com/zotero/zotero) repository, then:
-```
-nix run nixpkgs#nix-update -- --flake --version branch=<rev> zotero-<submodule>
+git clone https://github.com/zotero/zotero $zotero_repo_path
+./update.sh $zotero_repo_path submodules
 ```
 
-This needs to be automated into an update script.

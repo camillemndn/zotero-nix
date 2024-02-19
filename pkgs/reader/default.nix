@@ -10,16 +10,14 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf-reader";
-    rev = "dbb56b8be5f79e3db2be20ef4b52485c6a7a7cd7";
-    hash = "sha256-qXtxW8yQaIpma3GlhmZl6VomDFIlTZ3Iq0Oy/BJu8Eg=";
+    rev = "39e92a143d23ff874789ccf360c4633939cc2784";
+    hash = "sha256-uidg5VnPvopH6puPWaJ0biV4V1z5Hw4gwelQmwB7uNg=";
   };
 
-  npmDepsHash = "sha256-zzAVIJfSjV/ij0tOlKSWSbPkIQEPrCLwGHAW7/aUyXI=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
+  npmDepsHash = "sha256-cgX9m8csmsRt3+HavW5VqDypskCXM4LC8acOFe4adkY=";
+  npmRebuildFlags = [ "--ignore-scripts" ];
 
   postPatch = ''
-    cp ${./package-lock.patch} package-lock.json
     # Avoid npm install since it is handled by buildNpmPackage
     sed -i pdfjs/build \
       -e 's/npx gulp/#npx gulp/g' \

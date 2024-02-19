@@ -29,16 +29,12 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
-    rev = "ac7eb876327d828a0872a7691ace88a3a3ae2e76";
-    hash = "sha256-uMWfuscSBnuYifm8At7o0Sq4oE2YQS8GX0THteDaKm8=";
+    rev = "009a2ca38abee81eec7e0bdf9d962b07c8c653d7";
+    hash = "sha256-qLwNFMIkI8LYeUmIf0bT13M1LdObaDOh/+8RmB5FV7M=";
     fetchSubmodules = true;
   };
 
-  npmDepsHash = "sha256-rZU5fuKlLXx4fSMTlMJUtKRPO0Wd+KW6trOWnxEvFrc=";
-  npmFlags = [ "--legacy-peer-deps" ];
-  NODE_OPTIONS = "--openssl-legacy-provider";
-
-  patches = [ ./dark-tabs.patch ];
+  npmDepsHash = "sha256-LrWR1CqaQDBP+q2+7gHcjxIEoS7gaUoeKQhid+Z8WQ8=";
 
   postPatch = ''
     # Replace Git submodules by their respective NPM packages
@@ -84,12 +80,13 @@ buildNpmPackage rec {
 
     # Make the copied files writable after rsync and remove multiple arch build
     sed -i app/build.sh \
-      -Ee 's|(rsync -a.*)|\1; chmod -R +w $BUILD_DIR|' \
+      -e 's/\(rsync -a.*\)/\1; chmod -R +w ./' \
       -e 's/x86_64//g' \
       -e 's/firefox-"/firefox"/g' \
       -e 's/Zotero_linux-/Zotero_linux/g' \
       -e 's/for arch in \$archs/for arch in ""/g' \
-      -e '/linux\/updater.tar.xz/,+3d'
+      -e '/linux\/updater.tar.xz/,+2d' \
+      -e '/# Copy icons/a mkdir -p $APPDIR\/icons/default'
   '';
 
   nativeBuildInputs = [ copyDesktopItems makeBinaryWrapper perl python3 rsync unzip zip gtk3 ];
@@ -136,10 +133,12 @@ buildNpmPackage rec {
     patchelf $out/lib/zotero/zotero-bin \
       --set-interpreter $(cat $NIX_CC/nix-support/dynamic-linker)
 
-    for size in 16 32 48 256; do
-      install -Dm444 app/staging/Zotero_linux/chrome/icons/default/default$size.png \
+    for size in 32 64 128; do
+      install -Dm444 app/staging/Zotero_linux/icons/icon$size.png \
         $out/share/icons/hicolor/''${size}x''${size}/apps/zotero.png
     done
+    install -Dm444 app/staging/Zotero_linux/icons/symbolic.svg \
+      $out/share/icons/hicolor/scalable/apps/zotero.svg
     
     runHook postInstall
   '';
