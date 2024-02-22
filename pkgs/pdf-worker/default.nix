@@ -16,8 +16,8 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-nqKXFcB1Y3+S+6IrxNIeKj/VH0V7myavQs+S25GT16w=";
 
+  # Avoid npm install since it is handled by buildNpmPackage
   postPatch = ''
-    # Avoid npm install since it is handled by buildNpmPackage
     sed -i scripts/build-pdfjs \
       -e 's/npx gulp/#npx gulp/g' \
       -e 's/npm ci/#npm ci/g'

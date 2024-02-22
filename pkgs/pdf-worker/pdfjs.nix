@@ -16,8 +16,8 @@ buildNpmPackage rec {
   npmDepsHash = "sha256-+LTfiFIZoGO/6dY4COEcjAcNcRkwEy+TqwISlUIcwh8=";
   makeCacheWritable = true;
 
+  # Add a version number
   postPatch = ''
-    # Add a version number
     sed -i package*.json -e '/"name": "pdf.js"/a "version": "1.0.0",'
   '';
 
