@@ -1,26 +1,28 @@
 # Zotero on Nix
 
-This is a best effort to package Zotero to [Nixpkgs](https://github.com/NixOS/nixpkgs/), from the source code available at: https://github.com/zotero/zotero/.
+This is a best effort to package Zotero to [Nixpkgs](https://github.com/NixOS/nixpkgs/) from the [source code](https://github.com/zotero/zotero/).
 
-Zotero runs officially on ```x86_64-linux```, though this project makes it available for ```aarch64-linux```.
+Zotero officially runs on ```x86_64-linux```, though this project makes it available for ```aarch64-linux```.
 
 ## Disclaimer
 
-Since Zotero is based on Firefox, whose cycles are shorter than Zotero's, the current version of Zotero 7, which is still in beta, is based on Firefox 102, which is already *deprecated*.
+Since Zotero is based on Firefox, whose cycles are shorter than Zotero's, the current version of Zotero 7, which is still in beta, is based on Firefox 102, which is already [*deprecated*](https://whattrainisitnow.com/calendar/).
 
 This is still better than Zotero 6, currently available in Nixpkgs, which is based on Firefox 60, which is deprecated since September 2019.
+
+*As of March 2024*, a new branch [```fx115```](https://github.com/camillemndn/zotero-nix/tree/fx115) is available, based on Firefox 115 ESR, which will be supported until September 2024.
 
 ## How to use
 
 ### To launch Zotero
 
-```
+```shell
 nix run github:camillemndn/zotero-nix
 ```
 
 ### To use Zotero in a flake
 
-```
+```nix
 {
   inputs.zotero-nix.url = "github:camillemndn/zotero-nix";
 
@@ -46,7 +48,7 @@ nix run github:camillemndn/zotero-nix
 ### Update instructions
 
 Use:
-```
+```shell
 git clone https://github.com/zotero/zotero $zotero_repo_path
 ./update.sh $zotero_repo_path submodules
 ```
