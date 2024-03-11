@@ -1,12 +1,7 @@
 { lib
 , buildNpmPackage
 , fetchFromGitHub
-, firefox-esr-102 ? (callPackage
-    (fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/82527892e46a17cff16c5842e2354a7f5b8d0025.tar.gz";
-      sha256 = "1ip3w3cr3w19p5xrvsazffimicf6qk6dn94biradyk4mzjk0pgad";
-    })
-    { }).firefox-esr-102
+, firefox-esr
 , makeDesktopItem
 , copyDesktopItems
 , python3
@@ -29,8 +24,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
-    rev = "92a04fcffa39f39474da1110c5f100993d80d83c";
-    hash = "sha256-lgDeMEHviATeu6y/XaQXBrw4l3Oed/R3/m6liUtqZus=";
+    rev = "a01d0cb8c74b201b190c310c1df36504fde6a5ed";
+    hash = "sha256-LCaVx9eBTShycZmY8rTQzjXcvBV3i1Agf++A26Q/sB8=";
     fetchSubmodules = true;
   };
 
@@ -115,7 +110,7 @@ buildNpmPackage rec {
 
   postBuild = ''
     mkdir app/xulrunner
-    cp -Lr ${firefox-esr-102}/lib/firefox app/xulrunner
+    cp -Lr ${firefox-esr}/lib/firefox app/xulrunner
     chmod -R +w /build
     app/scripts/dir_build -p l
     
