@@ -6,11 +6,10 @@ Zotero officially runs on ```x86_64-linux```, though this project makes it avail
 
 ## Disclaimer
 
-Since Zotero is based on Firefox, whose cycles are shorter than Zotero's, the current version of Zotero 7, which is still in beta, is based on Firefox 102, which is already [*deprecated*](https://whattrainisitnow.com/calendar/).
+Zotero 7 (which is still in beta) is based on Firefox ESR 115, which will be deprecated in [September 2024](https://whattrainisitnow.com/calendar/).
 
-This is still better than Zotero 6, currently available in Nixpkgs, which is based on Firefox 60, which is deprecated since September 2019.
+As a comparison, Zotero 6 (currently available in Nixpkgs) is based on Firefox ESR 60, which is deprecated since September 2019.
 
-*As of March 2024*, a new branch [```fx115```](https://github.com/camillemndn/zotero-nix/tree/fx115) is available, based on Firefox 115 ESR, which will be supported until September 2024.
 
 ## How to use
 
