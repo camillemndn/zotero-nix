@@ -1,6 +1,7 @@
-{ buildNpmPackage
-, fetchFromGitHub
-, callPackage
+{
+  buildNpmPackage,
+  fetchFromGitHub,
+  callPackage,
 }:
 
 buildNpmPackage rec {
@@ -26,7 +27,7 @@ buildNpmPackage rec {
 
   buildPhase = ''
     rm -rf pdf.js
-    cp -Lr ${callPackage ./pdfjs.nix {}}/lib/node_modules/pdf.js pdfjs
+    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js pdfjs
   '';
 
   preInstall = ''
