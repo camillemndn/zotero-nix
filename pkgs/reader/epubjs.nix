@@ -9,8 +9,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "epub.js";
-    rev = "fc79087dc9eb6676c7f5a3e2069c4bfaf424d2ec";
-    hash = "sha256-m/GYREm+waD4d5PUf/lGoqJEqoxFDuoNPZBo4CHfp7A=";
+    rev = "a621d3727bc75ad7e49f2d70941dc969be65dd21";
+    hash = "sha256-BnjNdvD75QgRwjV8v5hjOAz+UEPK8sv8oePjQVT7Y+0=";
   };
 
   npmDepsHash = "sha256-JYOEDX6SxB4Epwq5PZ5Y+EJO6UGKsOBIm2XIAqOwDO8=";

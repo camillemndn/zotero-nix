@@ -24,12 +24,12 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
-    rev = "5dae581ad3c39099c87807a87759ba9bacefa21e";
-    hash = "sha256-etS5qBooAWsEXPl4OBHBaXr0CmW5dOUGACpmqHqOqh0=";
+    rev = "7e01a7d0ec3faa20615509cab49926204dbfa32d";
+    hash = "sha256-repw5fYHwly2Q+ZkXGW2POIPM/FGjnV0oE9mD1abUuI=";
     fetchSubmodules = true;
   };
 
-  npmDepsHash = "sha256-2osmEWduzZVs/aBAE5y0Hy7SWF1j5GtvjzUib+oYDu4=";
+  npmDepsHash = "sha256-gY3DL7Vq9QsforaFZnWt0fmuZH7btwpfgeKn5N8fLXQ=";
 
   postPatch = ''
     # Replace Git submodules by their respective NPM packages

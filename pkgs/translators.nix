@@ -9,11 +9,11 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "translators";
-    rev = "4a8bd03064a56420dcfa0910791eba1b9447e99a";
-    hash = "sha256-4z+AGy4mBFaUxRAOKswcpPN7nwE7mGP+uMnIqtsl5jY=";
+    rev = "c528844c3612b8e77eb494eec9d7bf5a6997bf1d";
+    hash = "sha256-EhJSNZym7vCdukhdbCyTOb84KaM5E93uM5Ftv/ntHhQ=";
   };
 
-  npmDepsHash = "sha256-qr/XMbId/FYt14O2IztSBAPd+mR7h8LJg4KA+IUyeGk=";
+  npmDepsHash = "sha256-bC4HO492c+MSR2+LtyM4qTxZz1LwqPuYjqNgVuCVHYE=";
 
   # Avoid downloading binary in sandbox
   postPatch = ''
