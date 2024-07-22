@@ -21,7 +21,7 @@ pushd $ZOTERO_REPO_PATH || { echo "Failed to change directory to $ZOTERO_REPO_PA
 
 # Pulls the latest version
 git pull
-git checkout main
+git checkout fx115
 
 # Update submodules recursively
 git submodule update --init --recursive

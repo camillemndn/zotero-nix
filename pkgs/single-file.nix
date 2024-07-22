@@ -1,6 +1,4 @@
-{ buildNpmPackage
-, fetchFromGitHub
-}:
+{ buildNpmPackage, fetchFromGitHub }:
 
 buildNpmPackage rec {
   pname = "zotero-single-file";

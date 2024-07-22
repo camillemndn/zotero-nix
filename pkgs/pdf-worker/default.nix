@@ -1,6 +1,7 @@
-{ buildNpmPackage
-, fetchFromGitHub
-, callPackage
+{
+  buildNpmPackage,
+  fetchFromGitHub,
+  callPackage,
 }:
 
 buildNpmPackage rec {
@@ -10,11 +11,11 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf-worker";
-    rev = "b05d24b9a473a9bc323c1dab01e8bc5aa0581b92";
-    hash = "sha256-h1QsFMTN0k/spFUVxe0JZMN+plRvvKa6ef1z9pU9u2U=";
+    rev = "96059e77c1cd7e70418091762abe79875214d4ce";
+    hash = "sha256-IUZ9b8SZYH87aO04HaNGDtB2dczpO+4G0GmTGlE1Bd4=";
   };
 
-  npmDepsHash = "sha256-nqKXFcB1Y3+S+6IrxNIeKj/VH0V7myavQs+S25GT16w=";
+  npmDepsHash = "sha256-TGuN1fZOClzm6xD2rmn5BAemN4mbyOVaLbSRyMeDIm8=";
 
   # Avoid npm install since it is handled by buildNpmPackage
   postPatch = ''
@@ -25,7 +26,7 @@ buildNpmPackage rec {
 
   buildPhase = ''
     rm -rf pdf.js
-    cp -Lr ${callPackage ./pdfjs.nix {}}/lib/node_modules/pdf.js pdf.js
+    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js pdf.js
   '';
 
   preInstall = ''

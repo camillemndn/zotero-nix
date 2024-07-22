@@ -1,6 +1,4 @@
-{ buildNpmPackage
-, fetchFromGitHub
-}:
+{ buildNpmPackage, fetchFromGitHub }:
 
 buildNpmPackage rec {
   pname = "zotero-note-editor";
@@ -9,8 +7,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "note-editor";
-    rev = "508a90a66d030c2033039f5a256c1ab252097dc4";
-    hash = "sha256-cS55zX436drs/YK2wXUhPXUSRofa++oxwv/A3hc6dTg=";
+    rev = "b859def22f4d563bae6409d602eea429618a51e3";
+    hash = "sha256-SdgeLJOilIMLVPrUlh7ErJl5S1eZhnNHI1Lxa8zJNGQ=";
   };
 
   npmDepsHash = "sha256-dvlgXixWGW4pKiAr36fgrWeMY/XRTnp4Yo9MWwpeWkE=";

@@ -1,20 +1,21 @@
-{ lib
-, buildNpmPackage
-, fetchFromGitHub
-, firefox-esr
-, makeDesktopItem
-, copyDesktopItems
-, python3
-, unzip
-, zip
-, perl
-, rsync
-, callPackage
-, makeBinaryWrapper
-, glib
-, glibc
-, pciutils
-, gtk3
+{
+  lib,
+  buildNpmPackage,
+  fetchFromGitHub,
+  firefox-esr,
+  makeDesktopItem,
+  copyDesktopItems,
+  python3,
+  unzip,
+  zip,
+  perl,
+  rsync,
+  callPackage,
+  makeBinaryWrapper,
+  glib,
+  glibc,
+  pciutils,
+  gtk3,
 }:
 
 buildNpmPackage rec {
@@ -24,33 +25,35 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
-    rev = "5dae581ad3c39099c87807a87759ba9bacefa21e";
-    hash = "sha256-etS5qBooAWsEXPl4OBHBaXr0CmW5dOUGACpmqHqOqh0=";
+    rev = "7e01a7d0ec3faa20615509cab49926204dbfa32d";
+    hash = "sha256-repw5fYHwly2Q+ZkXGW2POIPM/FGjnV0oE9mD1abUuI=";
     fetchSubmodules = true;
   };
 
-  npmDepsHash = "sha256-2osmEWduzZVs/aBAE5y0Hy7SWF1j5GtvjzUib+oYDu4=";
+  npmDepsHash = "sha256-gY3DL7Vq9QsforaFZnWt0fmuZH7btwpfgeKn5N8fLXQ=";
 
   postPatch = ''
     # Replace Git submodules by their respective NPM packages
     rm -rf resource/SingleFile chrome/content/zotero/xpcom/utilities reader pdf-worker translators note-editor
-    cp -Lr ${callPackage ./single-file.nix {}}/lib/node_modules/single-file resource/SingleFile
-    cp -Lr ${callPackage ./xpcom-utilities.nix {}}/lib/node_modules/@zotero/utilities chrome/content/zotero/xpcom/utilities
-    cp -r ${callPackage ./reader {}}/lib/node_modules/pdf-reader reader
-    cp -r ${callPackage ./pdf-worker {}}/lib/node_modules/pdf-worker pdf-worker
-    cp -Lr ${callPackage ./translators.nix {}}/lib/node_modules/translators-check translators
-    cp -Lr ${callPackage ./note-editor.nix {}}/lib/node_modules/zotero-note-editor note-editor
+    cp -Lr ${callPackage ./single-file.nix { }}/lib/node_modules/single-file resource/SingleFile
+    cp -Lr ${
+      callPackage ./xpcom-utilities.nix { }
+    }/lib/node_modules/@zotero/utilities chrome/content/zotero/xpcom/utilities
+    cp -r ${callPackage ./reader { }}/lib/node_modules/pdf-reader reader
+    cp -r ${callPackage ./pdf-worker { }}/lib/node_modules/pdf-worker pdf-worker
+    cp -Lr ${callPackage ./translators.nix { }}/lib/node_modules/translators-check translators
+    cp -Lr ${callPackage ./note-editor.nix { }}/lib/node_modules/zotero-note-editor note-editor
     chmod +w {reader,pdf-worker} -R
     (
       cd reader
       rm -rf epubjs/epub.js pdfjs/pdf.js
-      cp -Lr ${callPackage ./reader/epubjs.nix {}}/lib/node_modules/epubjs epubjs/epub.js 
-      cp -Lr ${callPackage ./reader/pdfjs.nix {}}/lib/node_modules/pdf.js pdfjs/pdf.js
+      cp -Lr ${callPackage ./reader/epubjs.nix { }}/lib/node_modules/epubjs epubjs/epub.js 
+      cp -Lr ${callPackage ./reader/pdfjs.nix { }}/lib/node_modules/pdf.js pdfjs/pdf.js
     )
     (
       cd pdf-worker
       rm -rf pdf.js
-      cp -Lr ${callPackage ./pdf-worker/pdfjs.nix {}}/lib/node_modules/pdf.js pdf.js
+      cp -Lr ${callPackage ./pdf-worker/pdfjs.nix { }}/lib/node_modules/pdf.js pdf.js
     )
     chmod +w . -R
 
@@ -63,7 +66,7 @@ buildNpmPackage rec {
 
     # Zotero standalone build scripts
     patchShebangs app/build.sh app/scripts/{dir_build,fetch_xulrunner,prepare_build}
-    
+
     # Fix Firefox runtime fetching 
     sed -i app/scripts/fetch_xulrunner \
     -e '/updateAuto/,+7d' \
@@ -84,7 +87,16 @@ buildNpmPackage rec {
       -e '/# Copy icons/a mkdir -p $APPDIR\/icons/default'
   '';
 
-  nativeBuildInputs = [ copyDesktopItems makeBinaryWrapper perl python3 rsync unzip zip gtk3 ];
+  nativeBuildInputs = [
+    copyDesktopItems
+    makeBinaryWrapper
+    perl
+    python3
+    rsync
+    unzip
+    zip
+    gtk3
+  ];
 
   desktopItems = [
     (makeDesktopItem {
@@ -94,10 +106,16 @@ buildNpmPackage rec {
       comment = meta.description;
       desktopName = "Zotero";
       genericName = "Reference Management";
-      categories = [ "Office" "Database" ];
+      categories = [
+        "Office"
+        "Database"
+      ];
       startupNotify = true;
       startupWMClass = pname;
-      mimeTypes = [ "x-scheme-handler/zotero" "text/plain" ];
+      mimeTypes = [
+        "x-scheme-handler/zotero"
+        "text/plain"
+      ];
       terminal = false;
       actions = {
         profile-manager-window = {
@@ -113,7 +131,7 @@ buildNpmPackage rec {
     cp -Lr ${firefox-esr}/lib/firefox app/xulrunner
     chmod -R +w /build
     app/scripts/dir_build -p l
-    
+
     patchShebangs app/staging/Zotero_linux/zotero
     sed -i app/staging/Zotero_linux/zotero -e '/MOZ_LEGACY_PROFILES/a export MOZ_ENABLE_WAYLAND=1'
   '';
@@ -121,10 +139,17 @@ buildNpmPackage rec {
   installPhase = ''
     mkdir -p $out/{bin,lib}
     cp -Lr app/staging/Zotero_linux $out/lib/zotero
-    
+
     makeBinaryWrapper $out/{lib/zotero,bin}/zotero \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ glib.out glibc pciutils gtk3 ] }"
-    
+      --prefix LD_LIBRARY_PATH : "${
+        lib.makeLibraryPath [
+          glib.out
+          glibc
+          pciutils
+          gtk3
+        ]
+      }"
+
     patchelf $out/lib/zotero/zotero-bin \
       --set-interpreter $(cat $NIX_CC/nix-support/dynamic-linker)
 
@@ -134,17 +159,22 @@ buildNpmPackage rec {
     done
     install -Dm444 app/staging/Zotero_linux/icons/symbolic.svg \
       $out/share/icons/hicolor/scalable/apps/zotero.svg
-    
+
     runHook postInstall
   '';
 
-  passthru = { inherit gtk3; };
+  passthru = {
+    inherit gtk3;
+  };
 
   meta = with lib; {
     description = "Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources";
     homepage = "https://github.com/zotero/zotero";
     license = licenses.agpl3Only;
     maintainers = with maintainers; [ camillemndn ];
-    platforms = [ "x86_64-linux" "aarch64-linux" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 }

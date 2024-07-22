@@ -1,5 +1,7 @@
-{ buildNpmPackage
-, fetchFromGitHub
+{
+  buildNpmPackage,
+  fetchFromGitHub,
+  writeScriptBin,
 }:
 
 buildNpmPackage rec {
@@ -9,12 +11,18 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf.js";
-    rev = "130200b962f0251dc9cf33c2d534873cbbcb1322";
-    hash = "sha256-JjsWoA/mvYTqTAW1PzoV/WYxJYoWv557bqfRyhJlO54=";
+    rev = "68d529d58f39de388c7d68aef0ae24da5dd64000";
+    hash = "sha256-l7l/a8m/VDBv7+3tkx4cTfOSjFL6ehufuML7KGnWleM=";
   };
 
-  npmDepsHash = "sha256-+LTfiFIZoGO/6dY4COEcjAcNcRkwEy+TqwISlUIcwh8=";
+  npmDepsHash = "sha256-JJ9mgzKGYOfyu/5O/VrNL6ImRUCzpcgMOBmLADYM9GQ=";
   makeCacheWritable = true;
+
+  nativeBuildInputs = [
+    (writeScriptBin "prebuild" ''
+      echo "Skip prebuild step."
+    '')
+  ];
 
   # Add a version number
   postPatch = ''
@@ -22,7 +30,7 @@ buildNpmPackage rec {
   '';
 
   buildPhase = ''
-    node_modules/.bin/gulp lib
+    node_modules/.bin/gulp lib-legacy
   '';
 
   postInstall = ''
