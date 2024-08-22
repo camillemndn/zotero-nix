@@ -8,7 +8,7 @@ if [ $# -eq 0 ]; then
 fi
 
 # Assign the first argument as the path to the Zotero Git repository
-export ZOTERO_REPO_PATH="$(pwd)"
+export ZOTERO_REPO_PATH=$1
 
-cd $ZOTERO_REPO_PATH
-git submodule foreach --recursive --quiet 'if [ -f "package.json" ]; then echo "$(realpath --relative-to="$ZOTERO_REPO_PATH" "$toplevel/$path")"; fi'
+cd "$ZOTERO_REPO_PATH"
+git submodule foreach --recursive --quiet 'if [ -f "package.json" ]; then echo $(realpath --relative-to="$ZOTERO_REPO_PATH" "$toplevel/$path"); fi'

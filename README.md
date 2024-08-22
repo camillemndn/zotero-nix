@@ -2,14 +2,11 @@
 
 This is a best effort to package Zotero to [Nixpkgs](https://github.com/NixOS/nixpkgs/) from the [source code](https://github.com/zotero/zotero/).
 
-Zotero officially runs on ```x86_64-linux```, though this project makes it available for ```aarch64-linux```.
+Zotero officially runs on `x86_64-linux`, though this project makes it available for `aarch64-linux`.
 
 ## Disclaimer
 
-Zotero 7 (which is still in beta) is based on Firefox ESR 115, which will be deprecated in [September 2024](https://whattrainisitnow.com/calendar/).
-
-As a comparison, Zotero 6 (currently available in Nixpkgs) is based on Firefox ESR 60, which is deprecated since September 2019.
-
+Zotero 7 is based on Firefox ESR 115, which will be deprecated in [September 2024](https://whattrainisitnow.com/calendar/).
 
 ## How to use
 
@@ -47,8 +44,8 @@ nix run github:camillemndn/zotero-nix
 ### Update instructions
 
 Use:
+
 ```shell
 git clone https://github.com/zotero/zotero $zotero_repo_path
 ./update.sh $zotero_repo_path submodules
 ```
-
