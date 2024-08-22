@@ -25,12 +25,12 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
-    rev = "7e01a7d0ec3faa20615509cab49926204dbfa32d";
-    hash = "sha256-repw5fYHwly2Q+ZkXGW2POIPM/FGjnV0oE9mD1abUuI=";
+    rev = version;
+    hash = "sha256-H4bcy0HjW+vWGeEOInn1JO6nBTsI/yXMgwVbLXCepns=";
     fetchSubmodules = true;
   };
 
-  npmDepsHash = "sha256-gY3DL7Vq9QsforaFZnWt0fmuZH7btwpfgeKn5N8fLXQ=";
+  npmDepsHash = "sha256-KAmz/AEp0dD3x4uVp+bWGEvVa4BaG9jGYjaSZDZZzsI=";
 
   postPatch = ''
     # Replace Git submodules by their respective NPM packages
@@ -82,6 +82,7 @@ buildNpmPackage rec {
       -e 's/x86_64//g' \
       -e 's/firefox-"/firefox"/g' \
       -e 's/Zotero_linux-/Zotero_linux/g' \
+      -e 's/removed-files_linux-\$arch/removed-files_linux-x86_64/' \
       -e 's/for arch in \$archs/for arch in ""/g' \
       -e '/linux\/updater.tar.xz/,+2d' \
       -e '/# Copy icons/a mkdir -p $APPDIR\/icons/default'
