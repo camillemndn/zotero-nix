@@ -11,8 +11,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "pdf-worker";
-    rev = "96059e77c1cd7e70418091762abe79875214d4ce";
-    hash = "sha256-IUZ9b8SZYH87aO04HaNGDtB2dczpO+4G0GmTGlE1Bd4=";
+    rev = "0bef0fd6c6393f8ff595b1d99650e984f72db6b4";
+    hash = "sha256-6bgq50TrZ7LejzZ/Hfyzt4w2ScZUCUvpyieZjSuU/gM=";
   };
 
   npmDepsHash = "sha256-TGuN1fZOClzm6xD2rmn5BAemN4mbyOVaLbSRyMeDIm8=";

@@ -7,8 +7,8 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "translators";
-    rev = "c528844c3612b8e77eb494eec9d7bf5a6997bf1d";
-    hash = "sha256-EhJSNZym7vCdukhdbCyTOb84KaM5E93uM5Ftv/ntHhQ=";
+    rev = "1124865649a3835ac0164730e022ff26a743771f";
+    hash = "sha256-0l8vajxi31aC5+aX6q5wdtoL4SWE8KgGZH2fQz5HX1A=";
   };
 
   npmDepsHash = "sha256-bC4HO492c+MSR2+LtyM4qTxZz1LwqPuYjqNgVuCVHYE=";

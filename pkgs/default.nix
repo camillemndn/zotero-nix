@@ -20,7 +20,7 @@
 
 buildNpmPackage rec {
   pname = "zotero";
-  version = "7.0.0.SOURCE.${builtins.substring 0 9 src.rev}";
+  version = "7.0.0";
 
   src = fetchFromGitHub {
     owner = "zotero";
@@ -165,6 +165,7 @@ buildNpmPackage rec {
 
   passthru = {
     inherit gtk3;
+    updateScript = [ ./update.sh ];
   };
 
   meta = with lib; {
