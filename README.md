@@ -12,7 +12,7 @@ Zotero 7 is based on Firefox ESR 115, which will be deprecated in [September 202
 
 ### To launch Zotero
 
-```shell
+```bash
 nix run github:camillemndn/zotero-nix
 ```
 
@@ -45,7 +45,7 @@ nix run github:camillemndn/zotero-nix
 
 Use:
 
-```shell
+```bash
 git clone https://github.com/zotero/zotero $zotero_repo_path
-./update.sh $zotero_repo_path submodules
+pkgs/update.sh $zotero_repo_path pkgs/submodules <version>
 ```
