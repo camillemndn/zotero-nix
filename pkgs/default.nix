@@ -74,7 +74,9 @@ buildNpmPackage rec {
     -e '/BUILD_LINUX == 1/a \  pushd firefox; modify_omni x86_64; popd'
 
     # Fix version
-    sed -i app/scripts/dir_build -e 's/-c $CHANNEL/-c release/'
+    sed -i app/scripts/dir_build \
+      -Ee 's/(.*hash=).*/\1release/' \
+      -e 's/-c $CHANNEL/-c release/'
 
     # Make the copied files writable after rsync and remove multiple arch build
     sed -i app/build.sh \
