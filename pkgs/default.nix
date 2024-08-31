@@ -2,7 +2,7 @@
   lib,
   buildNpmPackage,
   fetchFromGitHub,
-  firefox-esr,
+  firefox-esr-115,
   makeDesktopItem,
   copyDesktopItems,
   python3,
@@ -73,8 +73,8 @@ buildNpmPackage rec {
     -e '/GECKO_VERSION_LINUX/,+30d' \
     -e '/BUILD_LINUX == 1/a \  pushd firefox; modify_omni x86_64; popd'
 
-    # Use the hash from this revision
-    sed -i app/scripts/dir_build -Ee 's/(.*hash=).*/\1${src.rev}/'
+    # Fix version
+    sed -i app/scripts/dir_build -e 's/-c $CHANNEL/-c release/'
 
     # Make the copied files writable after rsync and remove multiple arch build
     sed -i app/build.sh \
@@ -129,7 +129,7 @@ buildNpmPackage rec {
 
   postBuild = ''
     mkdir app/xulrunner
-    cp -Lr ${firefox-esr}/lib/firefox app/xulrunner
+    cp -Lr ${firefox-esr-115}/lib/firefox app/xulrunner
     chmod -R +w /build
     app/scripts/dir_build -p l
 
