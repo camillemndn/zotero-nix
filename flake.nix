@@ -2,7 +2,7 @@
   description = "Zotero on Nix";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
     flake-compat.url = "github:edolstra/flake-compat";
     utils.url = "flake-utils";
   };
