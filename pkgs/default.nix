@@ -34,7 +34,7 @@ buildNpmPackage rec {
 
   postPatch = ''
     # Replace Git submodules by their respective NPM packages
-    rm -rf resource/SingleFile chrome/content/zotero/xpcom/utilities reader pdf-worker translators note-editor
+    rm -r resource/SingleFile chrome/content/zotero/xpcom/utilities reader pdf-worker translators note-editor
     cp -Lr ${callPackage ./single-file.nix { }}/lib/node_modules/single-file resource/SingleFile
     cp -Lr ${
       callPackage ./xpcom-utilities.nix { }
@@ -43,18 +43,6 @@ buildNpmPackage rec {
     cp -r ${callPackage ./pdf-worker { }}/lib/node_modules/pdf-worker pdf-worker
     cp -Lr ${callPackage ./translators.nix { }}/lib/node_modules/translators-check translators
     cp -Lr ${callPackage ./note-editor.nix { }}/lib/node_modules/zotero-note-editor note-editor
-    chmod +w {reader,pdf-worker} -R
-    (
-      cd reader
-      rm -rf epubjs/epub.js pdfjs/pdf.js
-      cp -Lr ${callPackage ./reader/epubjs.nix { }}/lib/node_modules/epubjs epubjs/epub.js 
-      cp -Lr ${callPackage ./reader/pdfjs.nix { }}/lib/node_modules/pdf.js pdfjs/pdf.js
-    )
-    (
-      cd pdf-worker
-      rm -rf pdf.js
-      cp -Lr ${callPackage ./pdf-worker/pdfjs.nix { }}/lib/node_modules/pdf.js pdf.js
-    )
     chmod +w . -R
 
     # Avoid npm install and using git

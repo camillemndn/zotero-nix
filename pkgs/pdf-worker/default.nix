@@ -20,20 +20,23 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-TGuN1fZOClzm6xD2rmn5BAemN4mbyOVaLbSRyMeDIm8=";
 
-  # Avoid npm install since it is handled by buildNpmPackage
   postPatch = ''
+    rm -r pdf.js
+
     sed -i scripts/build-pdfjs \
       -e 's/npx gulp/#npx gulp/g' \
       -e 's/npm ci/#npm ci/g'
   '';
 
-  buildPhase = ''
-    rm -rf pdf.js
-    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js pdf.js
-  '';
+  dontNpmBuild = true;
 
+  # This makes webpack available for later build
   preInstall = ''
     mkdir -p $out/lib/node_modules/pdf-worker
     cp -r node_modules $out/lib/node_modules/pdf-worker/node_modules
+  '';
+
+  postInstall = ''
+    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js $out/lib/node_modules/pdf-worker/pdf.js
   '';
 }
