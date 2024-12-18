@@ -6,19 +6,19 @@
 
 buildNpmPackage rec {
   pname = "zotero-reader";
-  version = "7.0.1";
+  version = "7.0.11";
 
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
     rev = version;
-    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    hash = "sha256-eTlysgISTjimKvVhTbnr4Dj4gcN7qAVXAjuUmVqrVlE=";
     fetchSubmodules = true;
   };
 
   sourceRoot = "source/reader";
 
-  npmDepsHash = "sha256-26i2+sY2Kp0DIFOUkQVlI67HO4KTcQyd8pqSZqpWCCQ=";
+  npmDepsHash = "sha256-zOcXOio2VLzElHf5LtJO4XcBDLV5WGgYAeRjFrbUsNE=";
   npmRebuildFlags = [ "--ignore-scripts" ];
 
   # Avoid npm install since it is handled by buildNpmPackage
