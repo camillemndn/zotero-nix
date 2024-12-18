@@ -2,14 +2,17 @@
 
 buildNpmPackage rec {
   pname = "zotero-single-file";
-  version = builtins.substring 0 9 src.rev;
+  version = "7.0.1";
 
   src = fetchFromGitHub {
-    owner = "gildas-lormeau";
-    repo = "SingleFile";
-    rev = "0bca0227851348ef9bbaec780e88deb32b1cc03d";
-    hash = "sha256-iP1eVkBOkdowdZlG2i/exJrSWEzyD3/HGf2maQNN7Oc=";
+    owner = "zotero";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    fetchSubmodules = true;
   };
+
+  sourceRoot = "source/resource/SingleFile";
 
   npmDepsHash = "sha256-wsoXotl8FLkWZYcKGUCCGc1iZn5dlmlHBdLZh0H4Zuc=";
   dontNpmBuild = true;

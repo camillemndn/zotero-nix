@@ -6,14 +6,17 @@
 
 buildNpmPackage rec {
   pname = "zotero-pdf-worker";
-  version = builtins.substring 0 9 src.rev;
+  version = "7.0.1";
 
   src = fetchFromGitHub {
     owner = "zotero";
-    repo = "pdf-worker";
-    rev = "0bef0fd6c6393f8ff595b1d99650e984f72db6b4";
-    hash = "sha256-6bgq50TrZ7LejzZ/Hfyzt4w2ScZUCUvpyieZjSuU/gM=";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    fetchSubmodules = true;
   };
+
+  sourceRoot = "source/pdf-worker";
 
   npmDepsHash = "sha256-TGuN1fZOClzm6xD2rmn5BAemN4mbyOVaLbSRyMeDIm8=";
 

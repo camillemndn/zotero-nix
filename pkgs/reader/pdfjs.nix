@@ -6,14 +6,17 @@
 
 buildNpmPackage rec {
   pname = "zotero-reader-pdfjs";
-  version = builtins.substring 0 9 src.rev;
+  version = "7.0.1";
 
   src = fetchFromGitHub {
     owner = "zotero";
-    repo = "pdf.js";
-    rev = "b658eb6edc972f21b4518a932e1836e7752ebe27";
-    hash = "sha256-PKaxJK85wRd+w8R/o70PVnAH9/SwfHJ6EhhC/33enMQ=";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    fetchSubmodules = true;
   };
+
+  sourceRoot = "source/reader/pdfjs/pdf.js";
 
   npmDepsHash = "sha256-NsS6odvDBWXWXtDmmV3YqT8gtcwTqYtZwxawQWYMxbM=";
   makeCacheWritable = true;

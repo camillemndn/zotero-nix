@@ -166,10 +166,7 @@ buildNpmPackage rec {
     runHook postInstall
   '';
 
-  passthru = {
-    inherit gtk3;
-    updateScript = [ ./update.sh ];
-  };
+  passthru = { inherit gtk3; };
 
   meta = with lib; {
     description = "Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources";

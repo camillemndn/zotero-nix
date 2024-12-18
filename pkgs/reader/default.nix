@@ -6,14 +6,17 @@
 
 buildNpmPackage rec {
   pname = "zotero-reader";
-  version = builtins.substring 0 9 src.rev;
+  version = "7.0.1";
 
   src = fetchFromGitHub {
     owner = "zotero";
-    repo = "reader";
-    rev = "82435d9299cf6d35ae745f57cbe232a334791761";
-    hash = "sha256-ESaxiVIlzKAad+le6oxLQSaqIWA7wTjkwNWGBBxz4wM=";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    fetchSubmodules = true;
   };
+
+  sourceRoot = "source/reader";
 
   npmDepsHash = "sha256-26i2+sY2Kp0DIFOUkQVlI67HO4KTcQyd8pqSZqpWCCQ=";
   npmRebuildFlags = [ "--ignore-scripts" ];
