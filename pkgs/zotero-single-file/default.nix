@@ -2,13 +2,13 @@
 
 buildNpmPackage rec {
   pname = "zotero-single-file";
-  version = "7.0.11";
+  version = "fa48e978c7001a3b3b487f738756600e312fe23d";
 
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
     rev = version;
-    hash = "sha256-eTlysgISTjimKvVhTbnr4Dj4gcN7qAVXAjuUmVqrVlE=";
+    hash = "sha256-ms7sq5XrvagskTgtXXLtI7W/Q3z/6bo+2v1YSytP5qc=";
     fetchSubmodules = true;
   };
 
