@@ -6,16 +6,19 @@
 
 buildNpmPackage rec {
   pname = "zotero-pdf-worker-pdfjs";
-  version = builtins.substring 0 9 src.rev;
+  version = "fa48e978c7001a3b3b487f738756600e312fe23d";
 
   src = fetchFromGitHub {
     owner = "zotero";
-    repo = "pdf.js";
-    rev = "b658eb6edc972f21b4518a932e1836e7752ebe27";
-    hash = "sha256-PKaxJK85wRd+w8R/o70PVnAH9/SwfHJ6EhhC/33enMQ=";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-ms7sq5XrvagskTgtXXLtI7W/Q3z/6bo+2v1YSytP5qc=";
+    fetchSubmodules = true;
   };
 
-  npmDepsHash = "sha256-NsS6odvDBWXWXtDmmV3YqT8gtcwTqYtZwxawQWYMxbM=";
+  sourceRoot = "source/pdf-worker/pdf.js";
+
+  npmDepsHash = "sha256-3a0lNwUxlHOnANq7MyefFCxDkc7PbWfXhUY6lf8U2Pc=";
   makeCacheWritable = true;
 
   nativeBuildInputs = [

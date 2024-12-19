@@ -1,36 +1,42 @@
 {
   buildNpmPackage,
   fetchFromGitHub,
-  callPackage,
+  zotero-pdf-worker-pdfjs,
 }:
 
 buildNpmPackage rec {
   pname = "zotero-pdf-worker";
-  version = builtins.substring 0 9 src.rev;
+  version = "fa48e978c7001a3b3b487f738756600e312fe23d";
 
   src = fetchFromGitHub {
     owner = "zotero";
-    repo = "pdf-worker";
-    rev = "0bef0fd6c6393f8ff595b1d99650e984f72db6b4";
-    hash = "sha256-6bgq50TrZ7LejzZ/Hfyzt4w2ScZUCUvpyieZjSuU/gM=";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-ms7sq5XrvagskTgtXXLtI7W/Q3z/6bo+2v1YSytP5qc=";
+    fetchSubmodules = true;
   };
+
+  sourceRoot = "source/pdf-worker";
 
   npmDepsHash = "sha256-TGuN1fZOClzm6xD2rmn5BAemN4mbyOVaLbSRyMeDIm8=";
 
-  # Avoid npm install since it is handled by buildNpmPackage
   postPatch = ''
+    rm -r pdf.js
+
     sed -i scripts/build-pdfjs \
       -e 's/npx gulp/#npx gulp/g' \
       -e 's/npm ci/#npm ci/g'
   '';
 
-  buildPhase = ''
-    rm -rf pdf.js
-    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js pdf.js
-  '';
+  dontNpmBuild = true;
 
+  # This makes webpack available for later build
   preInstall = ''
     mkdir -p $out/lib/node_modules/pdf-worker
     cp -r node_modules $out/lib/node_modules/pdf-worker/node_modules
+  '';
+
+  postInstall = ''
+    cp -Lr ${zotero-pdf-worker-pdfjs}/lib/node_modules/pdf.js $out/lib/node_modules/pdf-worker/pdf.js
   '';
 }

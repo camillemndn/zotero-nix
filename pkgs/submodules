@@ -1,9 +1,0 @@
-chrome/content/zotero/xpcom/utilities zotero-xpcom-utilities
-note-editor zotero-note-editor
-pdf-worker zotero-pdf-worker
-pdf-worker/pdf.js zotero-pdf-worker-pdfjs
-reader zotero-reader
-reader/epubjs/epub.js zotero-reader-epubjs
-reader/pdfjs/pdf.js zotero-reader-pdfjs
-resource/SingleFile zotero-single-file
-translators zotero-translators

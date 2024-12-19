@@ -2,14 +2,17 @@
 
 buildNpmPackage rec {
   pname = "zotero-translators";
-  version = builtins.substring 0 9 src.rev;
+  version = "fa48e978c7001a3b3b487f738756600e312fe23d";
 
   src = fetchFromGitHub {
     owner = "zotero";
-    repo = "translators";
-    rev = "1124865649a3835ac0164730e022ff26a743771f";
-    hash = "sha256-0l8vajxi31aC5+aX6q5wdtoL4SWE8KgGZH2fQz5HX1A=";
+    repo = "zotero";
+    rev = version;
+    hash = "sha256-ms7sq5XrvagskTgtXXLtI7W/Q3z/6bo+2v1YSytP5qc=";
+    fetchSubmodules = true;
   };
+
+  sourceRoot = "source/translators";
 
   npmDepsHash = "sha256-bC4HO492c+MSR2+LtyM4qTxZz1LwqPuYjqNgVuCVHYE=";
 
