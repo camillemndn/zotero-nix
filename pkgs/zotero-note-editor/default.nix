@@ -15,6 +15,7 @@ buildNpmPackage rec {
   sourceRoot = "source/note-editor";
 
   npmDepsHash = "sha256-XkbzND6OrR+sA/WOYPUXquu+6L4qZ/0/PcotMVqODvQ=";
+  makeCacheWritable = true;
 
   postInstall = ''
     cp -r build $out/lib/node_modules/zotero-note-editor/build

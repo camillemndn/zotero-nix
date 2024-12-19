@@ -6,7 +6,7 @@ Zotero officially runs on `x86_64-linux`, though this project makes it available
 
 ## Disclaimer
 
-Zotero 7 is based on Firefox ESR 115, which will be deprecated in [September 2024](https://whattrainisitnow.com/calendar/).
+Zotero 7 is based on Firefox ESR 128, which will be deprecated in [September 2025](https://whattrainisitnow.com/calendar/).
 
 ## How to use
 
