@@ -10,7 +10,7 @@
   outputs =
     { nixpkgs, utils, ... }:
 
-    utils.lib.eachDefaultSystem (
+    utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" ] (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
