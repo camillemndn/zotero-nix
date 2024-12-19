@@ -1,7 +1,8 @@
 {
   buildNpmPackage,
   fetchFromGitHub,
-  callPackage,
+  zotero-reader-epubjs,
+  zotero-reader-pdfjs,
 }:
 
 buildNpmPackage rec {
@@ -41,7 +42,7 @@ buildNpmPackage rec {
 
   postInstall = ''
     rm -r $out/lib/node_modules/pdf-reader/epubjs/epub.js
-    cp -Lr ${callPackage ./epubjs.nix { }}/lib/node_modules/epubjs $out/lib/node_modules/pdf-reader/epubjs/epub.js
-    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js $out/lib/node_modules/pdf-reader/pdfjs/pdf.js
+    cp -Lr ${zotero-reader-epubjs}/lib/node_modules/epubjs $out/lib/node_modules/pdf-reader/epubjs/epub.js
+    cp -Lr ${zotero-reader-pdfjs}/lib/node_modules/pdf.js $out/lib/node_modules/pdf-reader/pdfjs/pdf.js
   '';
 }

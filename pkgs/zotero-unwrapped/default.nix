@@ -2,6 +2,12 @@
   lib,
   buildNpmPackage,
   fetchFromGitHub,
+  zotero-note-editor,
+  zotero-pdf-worker,
+  zotero-reader,
+  zotero-single-file,
+  zotero-translators,
+  zotero-xpcom-utilities,
   firefox-esr-128,
   makeDesktopItem,
   copyDesktopItems,
@@ -10,7 +16,6 @@
   zip,
   perl,
   rsync,
-  callPackage,
   makeBinaryWrapper,
   glib,
   glibc,
@@ -35,14 +40,12 @@ buildNpmPackage rec {
   postPatch = ''
     # Replace Git submodules by their respective NPM packages
     rm -r resource/SingleFile chrome/content/zotero/xpcom/utilities reader pdf-worker translators note-editor
-    cp -Lr ${callPackage ./single-file.nix { }}/lib/node_modules/single-file resource/SingleFile
-    cp -Lr ${
-      callPackage ./xpcom-utilities.nix { }
-    }/lib/node_modules/@zotero/utilities chrome/content/zotero/xpcom/utilities
-    cp -r ${callPackage ./reader { }}/lib/node_modules/pdf-reader reader
-    cp -r ${callPackage ./pdf-worker { }}/lib/node_modules/pdf-worker pdf-worker
-    cp -Lr ${callPackage ./translators.nix { }}/lib/node_modules/translators-check translators
-    cp -Lr ${callPackage ./note-editor.nix { }}/lib/node_modules/zotero-note-editor note-editor
+    cp -Lr ${zotero-single-file}/lib/node_modules/single-file resource/SingleFile
+    cp -Lr ${zotero-xpcom-utilities}/lib/node_modules/@zotero/utilities chrome/content/zotero/xpcom/utilities
+    cp -r ${zotero-reader}/lib/node_modules/pdf-reader reader
+    cp -r ${zotero-pdf-worker}/lib/node_modules/pdf-worker pdf-worker
+    cp -Lr ${zotero-translators}/lib/node_modules/translators-check translators
+    cp -Lr ${zotero-note-editor}/lib/node_modules/zotero-note-editor note-editor
     chmod +w . -R
 
     # Avoid npm install and using git

@@ -1,7 +1,7 @@
 {
   buildNpmPackage,
   fetchFromGitHub,
-  callPackage,
+  zotero-pdf-worker-pdfjs,
 }:
 
 buildNpmPackage rec {
@@ -37,6 +37,6 @@ buildNpmPackage rec {
   '';
 
   postInstall = ''
-    cp -Lr ${callPackage ./pdfjs.nix { }}/lib/node_modules/pdf.js $out/lib/node_modules/pdf-worker/pdf.js
+    cp -Lr ${zotero-pdf-worker-pdfjs}/lib/node_modules/pdf.js $out/lib/node_modules/pdf-worker/pdf.js
   '';
 }
