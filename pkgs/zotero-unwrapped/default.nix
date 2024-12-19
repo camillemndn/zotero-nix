@@ -163,7 +163,7 @@ buildNpmPackage rec {
   passthru = {
     inherit gtk3;
     updateScript = writeShellScriptBin "zotero-update" (
-      lib.concatMapStringsSep "\n" (pkg: "${nix-update}/bin/nix-update --flake ${pkg}") (
+      lib.concatMapStringsSep "\n" (pkg: "${nix-update}/bin/nix-update --flake --version=branch ${pkg}") (
         lib.attrNames (import ../../.).packages.x86_64-linux
       )
     );
