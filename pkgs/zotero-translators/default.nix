@@ -2,13 +2,13 @@
 
 buildNpmPackage rec {
   pname = "zotero-translators";
-  version = "7.0.1";
+  version = "7.0.11";
 
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
     rev = version;
-    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    hash = "sha256-eTlysgISTjimKvVhTbnr4Dj4gcN7qAVXAjuUmVqrVlE=";
     fetchSubmodules = true;
   };
 

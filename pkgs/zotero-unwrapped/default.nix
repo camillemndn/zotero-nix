@@ -21,21 +21,24 @@
   glibc,
   pciutils,
   gtk3,
+  writeShellScriptBin,
+  nix-update,
+
 }:
 
 buildNpmPackage rec {
   pname = "zotero";
-  version = "7.0.1";
+  version = "7.0.11";
 
   src = fetchFromGitHub {
     owner = "zotero";
     repo = "zotero";
     rev = version;
-    hash = "sha256-VLl7vuk7x1DEBKFiRBHTLsYxKHoC2aah9P+rhQx6AbQ=";
+    hash = "sha256-eTlysgISTjimKvVhTbnr4Dj4gcN7qAVXAjuUmVqrVlE=";
     fetchSubmodules = true;
   };
 
-  npmDepsHash = "sha256-KAmz/AEp0dD3x4uVp+bWGEvVa4BaG9jGYjaSZDZZzsI=";
+  npmDepsHash = "sha256-qWeUeiwM6sCNovSoaEP3b42VTnCFSWLK9y8qPnWcSTE=";
 
   postPatch = ''
     # Replace Git submodules by their respective NPM packages
@@ -157,7 +160,14 @@ buildNpmPackage rec {
     runHook postInstall
   '';
 
-  passthru = { inherit gtk3; };
+  passthru = {
+    inherit gtk3;
+    updateScript = writeShellScriptBin "zotero-update" (
+      lib.concatMapStringsSep "\n" (pkg: "${nix-update}/bin/nix-update --flake ${pkg}") (
+        lib.attrNames (import ../../.).packages.x86_64-linux
+      )
+    );
+  };
 
   meta = with lib; {
     description = "Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources";
