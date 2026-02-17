@@ -1,4 +1,4 @@
-# Zotero on Nix
+# [DEPRECATED] Zotero on Nix
 
 This is a best effort to package Zotero to [Nixpkgs](https://github.com/NixOS/nixpkgs/) from the [source code](https://github.com/zotero/zotero/).
 
@@ -6,7 +6,7 @@ Zotero officially runs on `x86_64-linux`, though this project makes it available
 
 ## Disclaimer
 
-Zotero 7 is based on Firefox ESR 128, which will be deprecated in [September 2025](https://whattrainisitnow.com/calendar/).
+Since [this PR](https://github.com/NixOS/nixpkgs/pull/483099), Zotero 8 is built from source in Nixpkgs so this repository is no longer maintained.
 
 ## How to use
 
